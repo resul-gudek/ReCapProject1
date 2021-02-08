@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Business.Abstract
 {
-   public interface IColorService
+ public  interface IBrandService
     {
-        List<Color> GetAll(Color color);
-        void Add(Color color);
+        List<Brand> GetAll(Brand brand);
+
     }
 }
