@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,70 +13,58 @@ namespace DataAccess.Concrete.InMemory
     public class InMemoryCarDal : ICarDal
     {
         List<Car> _cars;
-        List<Color> _colors;
-        List<Brand> _brands;
         public InMemoryCarDal()
         {
-            _brands = new List<Brand>
-            {
-               new Brand {BrandId=1, BrandName="Mercedes"},
-               new Brand {BrandId=2, BrandName="BMW"},
-               new Brand {BrandId=3, BrandName="Audi"}
-            };
-            _colors = new List<Color>
-            {
-                new Color {ColorId=1, ColorName="Beyaz"},
-                new Color {ColorId=2, ColorName="Kırmızı"},
-                new Color {ColorId=3, ColorName="Siyah"}
-            };
+            _cars = new List<Car> {
+                new Car{CarId=1,BrandId=1,ColorId=1,ModelYear=2018,DailyPrice=150,Description="Kiralik Hyundai"},
+                new Car{CarId=2,BrandId=1,ColorId=1,ModelYear=2019,DailyPrice=120,Description="Kiralik BMW"},
+                new Car{CarId=3,BrandId=1,ColorId=1,ModelYear=2020,DailyPrice=180,Description="Kiralik Honda"},
+                new Car{CarId=4,BrandId=1,ColorId=1,ModelYear=2015,DailyPrice=130,Description="Kiralik Mercedes"},
+                new Car{CarId=5,BrandId=1,ColorId=1,ModelYear=2017,DailyPrice=140,Description="Kiralik Hyundai"}
 
-            _cars = new List<Car>
-            {
-                new Car {CarId=1, BrandId=1, ColorId=1, DailyPrice=150, Description="Aile arabası", ModelYear=2021},
-                new Car {CarId=2, BrandId=1, ColorId=1, DailyPrice=250, Description="Spor araba", ModelYear=2019},
-                new Car {CarId=3, BrandId=1, ColorId=2, DailyPrice=200, Description="Suv model araba", ModelYear=2020},
-                new Car {CarId=4, BrandId=2, ColorId=2, DailyPrice=150, Description="Spor araba2", ModelYear=2021},
-                new Car {CarId=5, BrandId=3, ColorId=3, DailyPrice=300, Description="Sedan aile arabası", ModelYear=2021}
             };
         }
-
-
-        public void Add(Car car)
+        public void Add(Car entity)
         {
-            _cars.Add(car);
+            _cars.Add(entity);
         }
 
-        public void Delete(Car car)
+        public void Delete(Car entity)
         {
-            Car CarToDelete = _cars.FirstOrDefault(p => p.CarId == car.CarId);
-            _cars.Remove(CarToDelete);
+            Car carToDelete = _cars.SingleOrDefault(p => p.CarId == entity.CarId);
+            _cars.Remove(carToDelete);
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Car GetById(Expression<Func<Car, bool>> filter)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Car> GetAll()
-        {
-            return _cars;
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
+            return _cars;
+        }
+
+        
+
+        public List<CarDetailDto> GetCarDetailIs()
+        {
             throw new NotImplementedException();
         }
 
-        public List<Car> GetById(int carId)
+        public List<CarDetailDto> GetCarDetails()
         {
-            return _cars.Where(p => p.CarId == carId).ToList();
+            throw new NotImplementedException();
         }
 
-        public void Update(Car car)
+        public void Update(Car entity)
         {
-            Car CarToUpdate = _cars.FirstOrDefault(p => p.CarId == car.CarId);
-            CarToUpdate.DailyPrice = car.DailyPrice;
-            CarToUpdate.ColorId = car.ColorId;
+            throw new NotImplementedException();
+        }
+
+        Car IEntityRepository<Car>.GetById(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
