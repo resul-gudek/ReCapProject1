@@ -14,7 +14,13 @@ namespace Business.ValidationRules.FluentValidation
 
             RuleFor(p => p.CarName).MinimumLength(2);
             RuleFor(p => p.DailyPrice).GreaterThanOrEqualTo(10).When(p => p.BrandId == 1);
+            RuleFor(p => p.CarName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalı");
             
+        }
+
+        private bool StartWithA(string arg)
+        {
+            return arg.StartsWith("A");
         }
     }
 }
