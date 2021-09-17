@@ -1,3 +1,3 @@
 # ReCapProject1
 
-- Engin Demiroğ yazılım geliştirici C#-Angular eğitimi ile paralel olarak geliştirdiğim Rentacar projesi
+- Engin Demiroğ'un vermiş olduğu  " Nitelikli yazılım geliştirici C#-Angular kampı" eğitimi ile paralel olarak geliştirdiğim Rentacar projesi.
